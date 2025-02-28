@@ -1,0 +1,132 @@
+.aboutContainer {
+    width: 100%;
+}
+
+/* About Section */
+.sectionP1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    gap: 40px;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.aboutImage {
+    max-width: 50%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.aboutContent {
+    flex: 1;
+    max-width: 500px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Marquee Effect */
+.marqueeWrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    background: #f8f8f8;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.marquee {
+    display: inline-block;
+    animation: marquee-scroll 10s linear infinite;
+}
+
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Features Section */
+/* Features Section */
+.featuresGrid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f8f8;
+    padding: 15px 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.feBox:hover {
+    transform: scale(1.05);
+}
+
+.icon {
+    font-size: 24px;
+    color: #ff8c00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .featuresGrid {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .feBox {
+        padding: 12px 15px;
+    }
+    
+}
+@media (max-width: 768px) {
+    .aboutContent {
+        max-width: 90%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        text-align: center; /* Ensures proper alignment */
+    }
+
+    .aboutContainer h2, 
+    .aboutContainer p {
+        word-break: break-word; /* Prevents text from overflowing */
+    }
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sectionP1 {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .aboutImage {
+        max-width: 80%;
+    }
+
+    .featuresGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .featuresGrid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

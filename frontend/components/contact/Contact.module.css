@@ -1,0 +1,111 @@
+.pageWrapper {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 4rem 1rem;
+  }
+  
+  .contentWrapper {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .iconWrapper {
+    margin-bottom: 2rem;
+  }
+  
+  .toolIcon {
+    font-size: 4rem;
+    color: #ff6b6b;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #343a40;
+  }
+  
+  .divider {
+    width: 80px;
+    height: 4px;
+    background: #ff6b6b;
+    margin: 1.5rem auto;
+    border-radius: 2px;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .cardsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .infoCard {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+    max-width: 300px;
+  }
+  
+  .infoCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cardIcon {
+    font-size: 2rem;
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .pageWrapper {
+      padding: 2rem 0;
+    }
+  
+    .title {
+      font-size: 2.5rem;
+    }
+  
+    .description {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+  
+    .infoCard {
+      padding: 1.5rem;
+    }
+  }
+  

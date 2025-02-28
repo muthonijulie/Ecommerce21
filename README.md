@@ -44,8 +44,8 @@ This application provides a complete shopping experience for skincare enthusiast
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/skincare-ecommerce.git
-cd skincare-ecommerce
+git clone https://github.com/muthonijulie/Ecommerce21.git
+cd Ecommerce21
 ```
 
 2. Install dependencies for both frontend and backend:
@@ -75,7 +75,7 @@ MONGODB_URI=mongodb://localhost:27017/skincare-ecommerce
 
 ```bash
 cd backend
-npm start
+nodemon server
 ```
 
 The server will start on port 5000 (or the port specified in your .env file).
@@ -84,7 +84,7 @@ The server will start on port 5000 (or the port specified in your .env file).
 
 ```bash
 cd frontend
-npm start
+npm run dev
 ```
 
 The React development server will start, typically on port 3000.

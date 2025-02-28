@@ -1,4 +1,5 @@
 import styles from "./Hero.module.css";
+import {Link} from "react-router-dom";
 import F1 from '../../src/assets/hero/F1.png'
 import F2 from '../../src/assets/hero/F2.png'
 import F3 from '../../src/assets/hero/F3.png'
@@ -30,7 +31,7 @@ const Hero = () => {
         <h2>Super value deals</h2>
         <h1>On all products</h1>
         <p>Save more with coupons & up to 70% off!</p>
-        <button>Shop Now</button>
+        <Link to="/shop"><button>Shop Now</button></Link>
       </section>
 
       <section className={styles.feature}>

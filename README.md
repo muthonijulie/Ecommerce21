@@ -8,7 +8,7 @@ This application provides a complete shopping experience for skincare enthusiast
 
 ## Live Demo
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://https://glow-cart-eight.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://glow-cart-eight.vercel.app/)
 
 ## Features
 

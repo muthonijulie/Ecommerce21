@@ -30,7 +30,7 @@ const Hero = () => {
         <h4>Trade-in-offer</h4>
         <h2>Super value deals</h2>
         <h1>On all products</h1>
-        <p>Save more with coupons & up to 70% off!</p>
+        <p>Save more with coupons & up to <span style={{color:"red"}}>70% off!</span></p>
         <Link to="/shop"><button>Shop Now</button></Link>
       </section>
 

@@ -82,15 +82,26 @@
   }
   
   /* Shopping Cart Icon */
-  .cart {
+  .cartButton {
     display: block;
     margin: 10px auto;
-    color: #ff6f61;
+    color: white;
+    border-radius: 2px;
     font-size: 20px;
     cursor: pointer;
+    background-color: #ff6f61;
+    padding: 10px 10px;
+    border: none;
+    outline: none;
+    
   }
-  
+  .cartButton:hover{
+    background-color: white;
+    color: #ff6f61;
+    transition: ease-in-out 0.1s;
+  }
   .cart:hover {
     color: #e64a45;
+    
   }
   

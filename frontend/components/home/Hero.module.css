@@ -23,24 +23,60 @@
         padding: 0 20px;
         background-position: 65%;
     }
+    .hero h4{
+        font-size: 16px;
+    }
+    .hero h2 {
+        font-size: 28px;
+    }  
+    .hero h1 {
+        font-size: 23px !important;
+    }  
+    
+    .hero button{
+        background-color: #088178 !important;
+        color: white !important;
+        padding: 10px 30px !important;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out !important;
+    }
 }
 
 .hero h4 {
-    padding-bottom: 15px;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.hero h2 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #222;
 }
 .hero h1 {
+    font-size: 48px;
+    font-weight: 800;
     color: #a0522d;
+    margin-bottom: 12px;
+}
+.hero p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #444;
 }
 .hero button {
-    background-image: url("button.png");
     background-color: transparent;
     color: #088178;
-    border: 0;
-    padding: 14px 80px 14px 65px;
+    border: none;
+    padding: 14px 80px;
     background-repeat: no-repeat;
     cursor: pointer;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
 }
 .feature {
     display: flex;
@@ -86,4 +122,20 @@
 }
 .feBox:nth-child(6) h6 {
     background-color: #fa8072;
+}
+
+@media screen and (max-width: 480px) {
+    .feature {
+        justify-content: center; /* Centers the items */
+        gap: 10px; /* Adds spacing between boxes */
+    }
+
+    .feBox {
+        width: 45%; /* Ensures two boxes per row */
+        margin: 10px 5px; /* Adds small margin for spacing */
+    }
+
+    .feBox img {
+        width: 100%; /* Keeps images responsive */
+    }
 }

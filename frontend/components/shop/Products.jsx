@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 import axios from "axios";
 import styles from "./Product.module.css";
+import CartConfirmation from "./CartConfirmation"; // Import the CartConfirmation component
+
 import NiveaSunscreen from '../../src/assets/products/Nivea Sunscreen.jpeg';
 import ThankYouFarmer from '../../src/assets/products/Thank You Farmer.jpg';
 import SpeickSun from '../../src/assets/products/Speick Sun.jpg';
@@ -40,6 +42,8 @@ const products = [
 
 const ProductCard = ({ id, img, brand, name, price }) => {
   const [loading, setLoading] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [addedProduct, setAddedProduct] = useState(null);
 
   const addToCart = async () => {
     setLoading(true);
@@ -51,7 +55,9 @@ const ProductCard = ({ id, img, brand, name, price }) => {
         image: img,
       });
 
-      alert(response.data.message);
+      // Instead of alert, show the confirmation modal
+      setAddedProduct({ img, name, price });
+      setShowConfirmation(true);
     } catch (error) {
       console.error("Error adding to cart:", error);
       alert("Failed to add item to cart");
@@ -59,23 +65,36 @@ const ProductCard = ({ id, img, brand, name, price }) => {
     setLoading(false);
   };
 
+  const handleCloseConfirmation = () => {
+    setShowConfirmation(false);
+  };
+
   return (
-    <div className={styles.pro}>
-      <img src={img} alt={name} />
-      <div className={styles.des}>
-        <span>{brand}</span>
-        <h5>{name}</h5>
-        <div className={styles.star}>
-          {[...Array(4)].map((_, index) => (
-            <FaStar key={index} color="rgb(243, 181, 25)" size={12} />
-          ))}
+    <>
+      <div className={styles.pro}>
+        <img src={img} alt={name} />
+        <div className={styles.des}>
+          <span>{brand}</span>
+          <h5>{name}</h5>
+          <div className={styles.star}>
+            {[...Array(4)].map((_, index) => (
+              <FaStar key={index} color="rgb(243, 181, 25)" size={12} />
+            ))}
+          </div>
+          <h4>{price}/=</h4>
         </div>
-        <h4>{price}/=</h4>
+        <button onClick={addToCart} className={styles.cartButton} disabled={loading}>
+          {loading ? "Adding..." : <FaShoppingCart className={styles.cart} />}
+        </button>
       </div>
-      <button onClick={addToCart} className={styles.cartButton} disabled={loading}>
-        {loading ? "Adding..." : <FaShoppingCart className={styles.cart} />}
-      </button>
-    </div>
+      
+      {/* Add the confirmation component */}
+      <CartConfirmation 
+        show={showConfirmation} 
+        product={addedProduct} 
+        onClose={handleCloseConfirmation} 
+      />
+    </>
   );
 };
 

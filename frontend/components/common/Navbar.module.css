@@ -1,57 +1,71 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  /* Navbar */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background: #e3def7;
-    position: relative;
-  }
-  
-  .logo a {
-    font-size: 24px;
-    font-weight: bold;
-    font-family: cursive;
-    text-decoration: none;
-    color: black;
-  }
-  
-  .navLinks {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .navLinks li {
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .navLinks a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  .navLinks a:hover {
-    color: #007a74;
-  }
-  
-  .active {
-    color: #007a74;
-    border-bottom: 2px solid #007a74;
-    padding-bottom: 5px;
-  }
-  /* Cart Icon */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: #e3def7 !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+.logo a {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: cursive;
+  text-decoration: none;
+  color: black;
+}
+
+.logoImage {
+  width: 170px; /* Default size */
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navigation Links */
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navLinks li {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: #007a74;
+}
+
+/* Active Link */
+.active {
+  color: #007a74 !important;
+  border-bottom: 2px solid #007a74;
+  padding-bottom: 5px;
+}
+
+/* Cart Icon */
 .cartIcon {
   position: relative;
   font-size: 22px;
@@ -74,39 +88,134 @@
   border-radius: 50%;
 }
 
-  .cartIcon {
-    font-size: 18px;
+/* Mobile Menu Icon */
+.mobileMenu {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1002;
+}
+
+/* Close button for mobile menu */
+.closeButton {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #000;
+}
+
+/* Overlay for mobile menu */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  display: none;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .logoImage {
+    width: 140px;
   }
-  
-  /* Mobile Menu */
+
+  .navLinks {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 250px;
+    height: 100vh;
+    background: #e3def7;
+    flex-direction: column;
+    /* Reduced gap between items */
+    gap: 0;
+    padding-top: 60px;
+    text-align: center;
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Slide-in effect when menu is active */
+  .navLinks.show {
+    right: 0;
+  }
+
+  .closeButton {
+    display: block;
+  }
+
   .mobileMenu {
-    display: none;
-    font-size: 22px;
-    cursor: pointer;
+    display: block;
+  }
+
+  .overlay {
+    display: block;
+  }
+
+  /* Add proper spacing between mobile menu items */
+  .navLinks li {
+    margin: 0;
+    width: 100%;
+  }
+
+  .navLinks a {
+    display: block;
+    padding: 15px 0;
+    width: 100%;
+    /* Add a subtle divider between menu items */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
   
-  /* Mobile Sidebar */
-  @media (max-width: 768px) {
-    .navLinks {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background: #e3def7;
-      flex-direction: column;
-      gap: 15px;
-      padding: 20px 0;
-      display: none;
-      text-align: center;
-      transition: all 0.3s ease-in-out;
-    }
-  
-    .navLinks.show {
-      display: flex;
-    }
-  
-    .mobileMenu {
-      display: block;
-    }
+  /* Special styling for the close button */
+  .navLinks .closeButton {
+    margin-bottom: 15px;
+    border-bottom: none;
   }
   
+  /* First menu item needs to be closer to top */
+  .navLinks li:first-of-type {
+    margin-top: -15px;
+  }
+  
+  /* Cart icon needs special treatment */
+  .navLinks .cartIcon {
+    margin-top: 10px;
+  }
+  
+  .navLinks .cartIcon a {
+    border-bottom: none;
+  }
+  .cartBadge {
+    position: absolute;
+    top: -8px;
+    right: 100px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+}
+
+/* Mobile Screens (480px and below) */
+@media (max-width: 480px) {
+  .logoImage {
+    width: 100px;
+  }
+  
+  .navbar {
+    padding: 10px 4%;
+  }
+}

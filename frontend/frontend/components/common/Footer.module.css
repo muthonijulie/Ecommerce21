@@ -1,0 +1,88 @@
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    max-width: 250px;
+}
+
+.logo {
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #222;
+    margin-bottom: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #8b4513;
+}
+
+.follow {
+    margin-top: 20px;
+}
+
+.icons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 20px;
+    color: #465b52;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.icon:hover {
+    color: #8b4513;
+}
+
+.install {
+    max-width: 250px;
+}
+
+.install .row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.install img {
+    width: 120px;
+    border-radius: 6px;
+    border: 1px solid #a0522d;
+}
+
+.copyright {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+}

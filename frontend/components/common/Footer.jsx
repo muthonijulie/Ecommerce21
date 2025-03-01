@@ -1,12 +1,16 @@
 
 import { FaFacebookF, FaTwitter, FaInstagram, FaPinterest } from "react-icons/fa";
 import styles from "./Footer.module.css";
+import Glow from "../../src/assets/Glow.png";
+import Play from "../../src/assets/footer/Play.jpg"
+import Pay from "../../src/assets/footer/Pay.png"
+import App from "../../src/assets/footer/App.jpg"
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.col}>
-        <img className={styles.logo} src="logo.png" alt="Logo" />
+        <img className={styles.logo} src={Glow} alt="Logo" />
         <h4>Contact</h4>
         <p><strong>Address: </strong>93/4 Yellow Brick Lane</p>
         <p><strong>Phone: </strong>+254706213608</p>
@@ -29,11 +33,11 @@ const Footer = () => {
         <h4>Install App</h4>
         <p>From App Store or Google Store</p>
         <div className={styles.row}>
-          <img src="app.jpg" alt="App Store" />
-          <img style={{height:"30px"}} src="https://logos-world.net/wp-content/uploads/2020/12/Google-Play-Logo.png" alt="Google Play" />
+          <img src={App} alt="App Store" />
+          <img style={{height:"30px"}} src={Play} alt="Google Play" />
         </div>
         <p>Secure Payment Gateways</p>
-        <img src="pay.png" alt="Payment Methods" />
+        <img src={Pay}alt="Payment Methods" />
       </div>
 
       <div className={styles.copyright}>

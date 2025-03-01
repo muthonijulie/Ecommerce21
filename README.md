@@ -6,7 +6,9 @@ A full-stack e-commerce application specializing in premium skincare products, f
 
 This application provides a complete shopping experience for skincare enthusiasts, with product browsing, responsive cart functionality, and a seamless checkout process.
 
-![Skincare E-Commerce Platform](https://via.placeholder.com/800x400?text=Skincare+E-Commerce+Platform)
+## Live Demo
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://https://glow-cart-eight.vercel.app/)
 
 ## Features
 

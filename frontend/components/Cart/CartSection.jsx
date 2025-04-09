@@ -64,7 +64,7 @@ const CartSection = () => {
   const subtotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
-  );
+  )
   const shipping = 500;
   const total = subtotal + shipping;
 

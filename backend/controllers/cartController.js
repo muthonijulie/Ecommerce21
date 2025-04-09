@@ -1,10 +1,10 @@
 const Cart=require("../Model/Cart");
-
+let cart=[];//added an empty list that adds new cart items
 const createItem= async (req, res) => {
   const { productId, name, price, image } = req.body;
 
   try {
-    let item = await Cart.findOne({ productId });
+    let item = await cart.find(item=>item.productId===productId);//tweaked  this code
     if (item) {
       item.quantity += 1;
       await item.save();

@@ -13,6 +13,7 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+//className={({isActive})=> isActive ? styles.active:undefined}-active link
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -69,33 +70,21 @@ const Navbar = () => {
           <FaTimes onClick={toggleMenu} />
         </li>
         <li>
-          <Link to="/" className={location.pathname === "/" ? styles.active : ""} onClick={() => setIsOpen(false)}>
-            Home
-          </Link>
+          <Link to="/shop"className={styles.active}>Shop</Link>
         </li>
         <li>
-          <Link to="/shop" className={location.pathname === "/shop" ? styles.active : ""} onClick={() => setIsOpen(false)}>
-            Shop
-          </Link>
+          <Link to="/blog"className={styles.active}>Blog</Link>
         </li>
         <li>
-          <Link to="/blog" className={location.pathname === "/blog" ? styles.active : ""} onClick={() => setIsOpen(false)}>
-            Blog
-          </Link>
+          <Link to="/about"className={styles.active}>About</Link>
         </li>
         <li>
-          <Link to="/about" className={location.pathname === "/about" ? styles.active : ""} onClick={() => setIsOpen(false)}>
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to="/contact" className={location.pathname === "/contact" ? styles.active : ""} onClick={() => setIsOpen(false)}>
-            Contact
-          </Link>
+          <Link to="/contact"className={styles.active}>Contact</Link>
         </li>
         <li className={styles.cartIcon}>
-          <Link to="/cart" className={location.pathname === "/cart" ? styles.active : ""} onClick={() => setIsOpen(false)}>
-            <FaShoppingBag />
+          <Link to="/cart">
+          Cart
+            < FaShoppingBag />
             {cartCount > 0 && <span className={styles.cartBadge}>{cartCount}</span>}
           </Link>
         </li>

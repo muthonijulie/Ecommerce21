@@ -1,4 +1,4 @@
-import Products from "../components/shop/Products";
+ import Products from "../components/shop/Products";
 
 const Shop = () => {
     return (
@@ -10,3 +10,4 @@ const Shop = () => {
     );
   };
 export default Shop
+

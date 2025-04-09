@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react";import {useState,useEffect} from "react";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 import axios from "axios";
 import styles from "./FeaturedProducts.module.css";
@@ -75,6 +75,26 @@ const ProductCard = ({ id, img, brand, name, price }) => {
 };
 
 const FeaturedProducts = () => {
+  const [products, setProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+ 
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/product");
+      setProduct(response.data);
+    } catch (error) {
+      console.error("Error fetching product items", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+   useEffect(() => {
+    fetchProduct();
+  }, []);
+
+  if (loading) return <p>Loading...</p>
+
   return (
     <section className={styles.sectionP1}>
       <div className={styles.proContainer}>

@@ -1,8 +1,8 @@
-import { useState, useEffect,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 import axios from "axios";
 import styles from "./Product.module.css";
-import CartConfirmation from "./CartConfirmation"; // Import the CartConfirmation component
+import CartConfirmation from "../shop/CartConfirmation"; // Import the CartConfirmation component
 
 import CartSection from "/components/Cart/CartSection";
 import NiveaSunscreen from '../../src/assets/products/Nivea Sunscreen.jpeg';
@@ -43,6 +43,8 @@ import NiveaSunscreen from '../../src/assets/products/Nivea Sunscreen.jpeg';
 
 const ProductCard = ({productId,img, brand, name, price ,cartItems, setCartItems}) => {
   const [loading, setLoading] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [addedProduct,setAddedProduct]=useState(null);
 
   const addToCart = async () => {
     setLoading(true);

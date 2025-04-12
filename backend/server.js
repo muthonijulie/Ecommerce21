@@ -5,6 +5,7 @@ const cors = require("cors");
 const app = express();
 const Cart=require('./Model/Cart');
 const Product=require('./Model/Product');
+const Blog=require('./Model/Blog');
 
 // Middleware
 app.use(express.json());
@@ -24,9 +25,11 @@ mongoose
 // Add to Cart Route
 const cartRoute=require("./routes/cartRoute");
 const productRoute=require("./routes/productRoute");
+const blogRoute=require("./routes/blogRoute");
 
 app.use("/cart",cartRoute);
 app.use("/product",productRoute);
+app.use("/blog",blogRoute);                 
 
 app.use("/images/hero", express.static("public/images/hero"));
 

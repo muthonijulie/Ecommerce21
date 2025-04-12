@@ -1,9 +1,9 @@
-import WorkInProgress from "../components/contact/Contact"
+import ContactForm from "../components/contact/ContactForm"
 
 const Contact = () => {
     return (
       <>
-       <WorkInProgress />
+       <ContactForm />
       </>
       
         

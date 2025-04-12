@@ -1,4 +1,136 @@
-.pageWrapper {
+
+
+.contact-container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  width: 100%;
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  justify-content: center;
+}
+
+.contact-intro {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-box {
+  background: #f1f5f9;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.icon {
+  font-size: 24px;
+  color: #3b82f6;
+}
+
+.contact-form {
+  flex: 2 1 400px;
+}
+
+.contact-form h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #1f2937;
+}
+
+.contact-form p {
+  margin-bottom: 30px;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+label {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+input,
+textarea {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #3b82f6;
+  outline: none;
+  background: #fff;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+button {
+  align-self: flex-start;
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  color: white;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: fit-content;
+}
+
+button:hover {
+  background: linear-gradient(to right, #4f46e5, #7c3aed);
+}
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .contact-info,
+  .contact-form {
+    flex: 1 1 100%;
+  }
+
+  .contact-form h2 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .contact-form p {
+    text-align: center;
+  }
+
+  button {
+    align-self: center;
+  }
+}
+
+
+/* .pageWrapper {
     min-height: calc(100vh - 200px);
     display: flex;
     align-items: center;
@@ -89,8 +221,8 @@
     }
   }
   
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
+   Responsive adjustments 
+   @media (max-width: 768px) {
     .pageWrapper {
       padding: 2rem 0;
     }
@@ -107,5 +239,4 @@
     .infoCard {
       padding: 1.5rem;
     }
-  }
-  
+  } */

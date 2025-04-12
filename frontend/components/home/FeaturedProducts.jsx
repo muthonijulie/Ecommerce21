@@ -66,11 +66,11 @@ const ProductCard = ({ id, img, brand, name, price }) => {
           </div>
           <h4>{price}/=</h4>
         </div>
-        {/* <button onClick={addToCart} className={styles.cartButton} disabled={loading}>
+        <button onClick={addToCart} className={styles.cartButton} disabled={loading}>
           {loading ? "Adding..." : <FaShoppingCart className={styles.cart} />}
-        </button> */}
+        </button>
       </div>
-      {/* <CartConfirmation show={showConfirmation} product={addedProduct} onClose={() => setShowConfirmation(false)} /> */}
+      <CartConfirmation show={showConfirmation} product={addedProduct} onClose={() => setShowConfirmation(false)} />
     </>
   );
 };

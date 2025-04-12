@@ -70,24 +70,25 @@ const Navbar = () => {
           <FaTimes onClick={toggleMenu} />
         </li>
         <li>
-          <Link to="/shop"className={styles.active}>Shop</Link>
+          <Link to="/shop"className={styles}>Shop</Link>
         </li>
-        <li>
-          <Link to="/blog"className={styles.active}>Blog</Link>
-        </li>
-        <li>
-          <Link to="/about"className={styles.active}>About</Link>
-        </li>
-        <li>
-          <Link to="/contact"className={styles.active}>Contact</Link>
-        </li>
-        <li className={styles.cartIcon}>
+         <li className={styles.cartIcon}>
           <Link to="/cart">
           Cart
             < FaShoppingBag />
             {cartCount > 0 && <span className={styles.cartBadge}>{cartCount}</span>}
           </Link>
         </li>
+        <li>
+          <Link to="/blog"className={styles}>Blog</Link>
+        </li>
+        <li>
+          <Link to="/about"className={styles}>About</Link>
+        </li>
+        <li>
+          <Link to="/contact"className={styles}>Contact</Link>
+        </li>
+       
       </ul>
 
       {/* Mobile Menu Toggle Button - only visible when menu is closed */}

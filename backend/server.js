@@ -26,10 +26,12 @@ mongoose
 const cartRoute=require("./routes/cartRoute");
 const productRoute=require("./routes/productRoute");
 const blogRoute=require("./routes/blogRoute");
+const contactRoute=require("./routes/contactRoute");  
 
 app.use("/cart",cartRoute);
 app.use("/product",productRoute);
-app.use("/blog",blogRoute);                 
+app.use("/blog",blogRoute);   
+app.use("/contact",contactRoute);              
 
 app.use("/images/hero", express.static("public/images/hero"));
 

@@ -111,7 +111,7 @@ const CartSection = () => {
                     <img src={item.image} alt={item.name} />
                   </td>
                   <td>{item.name}</td>
-                  <td>{item.price.toLocaleString()}/=</td>
+                  <td>{item.price}/=</td>
                   <td>
                     <input
                       type="number"

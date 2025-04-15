@@ -3,6 +3,8 @@ import { FaTimesCircle } from "react-icons/fa";
 import axios from "axios";
 import styles from "./Cart.module.css";
 import DeleteConfirmation from "./DeleteConfirmation";
+import { useNavigate } from "react-router-dom"; 
+import payment from "../payment/paymentForm.jsx";
 
 const CartSection = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -10,6 +12,7 @@ const CartSection = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [checkoutSuccess, setCheckoutSuccess] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCartItems();
@@ -59,12 +62,24 @@ const CartSection = () => {
   const handleCheckout = () => {
     setCheckoutSuccess(true);
     setCartItems([]);
+    navigate("/payment",{
+       state: {
+        orderId: "ORDER12345", // Generate a unique order ID
+        subtotal,
+        shipping,
+        total,
+        payBillNumber: "123456", // Example M-Pesa PayBill number
+        accountReference: "ACCOUNT123", // Example account reference
+      },
+    });
   };
 
   const subtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  )
+    (total, item) =>{
+      const price=parseFloat(item.price)||0;
+      const quantity=parseInt(item.quantity)||0;
+      return total + price * quantity;
+    },0);
   const shipping = 500;
   const total = subtotal + shipping;
 

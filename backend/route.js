@@ -119,7 +119,7 @@ function getAccessToken(){
     req.end();
 });
 }
-router.post("/api/callback", (req, res) => {
+router.post("/callback", (req, res) => {
   console.log("STK PUSH CALLBACK");
   const merchantRequestID = req.body.Body.stkCallback.MerchantRequestID;
   const checkoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;

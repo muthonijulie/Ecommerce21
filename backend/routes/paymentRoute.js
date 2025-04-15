@@ -1,11 +1,16 @@
 const moment=require("moment");
 const express=require("express");
 const router=express.Router();
+const http =require("http");
+const request=require("request");
+const https =require("https");
 
 router.post("/stkpush",(req,res)=>{
-    const {amount,phoneNumber}=req.body;
+     const { phoneNumber, amount, reference, accountReference } = req.body;
     console.log("Amount:",amount);
     console.log("Phone Number:",phoneNumber);
+     console.log("Reference:",reference);
+    console.log("Account Reference:",accountReference);
     res.json({message:"Payment initiated successfully"});
     if (phoneNumber.startsWith("+254")) {
         phoneNumber = phoneNumber.replace("+254", "0");
@@ -36,7 +41,7 @@ router.post("/stkpush",(req,res)=>{
                 PartyA:phoneNumber,
                 PartyB:"174379",
                 PhoneNumber:phoneNumber,
-                CallBackURL:"https://mydomain.com/Glow",
+                CallBackURL:"https://mydomain.com/path",
                 AccountReference:"GlowCart",
                 TransactionDesc:"Mpesa Daraja API stk push",
             
@@ -78,6 +83,7 @@ router.get("/access_token",(req,res)=>{
             res.status(500).send("Failed to fetch access token");
         });
     });
+    
 
 function getAccessToken(){
     const consumer_key="z20NFw1rcxc98hm0N3fxL84YenbkuLtGXbXzAMoh4iBBOSh2";

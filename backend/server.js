@@ -1,15 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const http =require("http");
 const bodyParser=require("body-parser");
-const moment=require("moment");
-const { timeStamp } = require("console");
-//miss request module
 const request=require("request");
-const https =require("https");
-const route=require("./route");
-
+const paymentRoute=require("./routes/paymentRoute");
+const https=require("https");
+const moment=require("moment");
 const app = express();
 const Cart=require('./Model/Cart');
 const Product=require('./Model/Product');
@@ -19,7 +15,7 @@ const Blog=require('./Model/Blog');
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/payment', route);
+app.use('/payment', paymentRoute);
 
 // Connect to MongoDB
 mongoose
@@ -29,18 +25,6 @@ mongoose
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error(err));
-app.get("/access_token",(req,res)=>{
-    getAccessToken()
-    .then((accessToken)=>{
-        res.send("Access token is:"+accessToken);
-    })
-    .catch((error) => {
-            console.error(error);
-            res.status(500).send("Failed to fetch access token");
-        });
-
-})
-//stk push route 
 app.get("/stkpush",(req,res)=>{
     getAccessToken()
     .then((accessToken)=>{
@@ -64,13 +48,13 @@ app.get("/stkpush",(req,res)=>{
                 Password:password,
                 Timestamp:timestamp,
                 TransactionType:"CustomerPayBillOnline",
-                Amount:1,
+                Amount:100,
                 PartyA:"254797565461",
                 PartyB:"174379",
                 PhoneNumber:"254797565461",
-                CallBackURL:"https://mydomain.com/Glow",
+                CallBackURL:"https://mydomain.com/path",
                 AccountReference:"GlowCart",
-                TransactionDesc:"Mpesa Daraja API stk push",
+                TransactionDesc:"Mpesa Daraja API stk push test ",
             
     
         },
@@ -91,6 +75,7 @@ app.get("/stkpush",(req,res)=>{
             res.status(500).send("Failed to fetch access token");
         });
 });
+
 app.get("/registerurl",(req,res)=>{
     getAccessToken()
     .then((accessToken)=>{
@@ -162,7 +147,11 @@ function getAccessToken(){
     req.end();
 });
 }
-
+app.get("/confirmation",(req,res)=>{
+    console.log("Confirmation URL hit");
+    console.log(req.body);
+    res.send("Confirmation URL hit");
+});
 
 // Add to Cart Route
 const cartRoute=require("./routes/cartRoute");

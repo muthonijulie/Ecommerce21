@@ -48,7 +48,7 @@ const PaymentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch("https://localhost:5000/payment", {
+    fetch("https://localhost:5000/stkpush", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

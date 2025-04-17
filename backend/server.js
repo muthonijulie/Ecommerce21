@@ -11,6 +11,7 @@ const Cart=require('./Model/Cart');
 const Product=require('./Model/Product');
 const Blog=require('./Model/Blog');
 
+const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 app.use(cors());
@@ -52,7 +53,7 @@ app.get("/stkpush",(req,res)=>{
                 PartyA:"254797565461",
                 PartyB:"174379",
                 PhoneNumber:"254797565461",
-                CallBackURL:"https://mydomain.com/path",
+                CallBackURL:" https://5b6e-197-248-38-31.ngrok-free.app/payment/callback",
                 AccountReference:"GlowCart",
                 TransactionDesc:"Mpesa Daraja API stk push test ",
             
@@ -111,7 +112,7 @@ function getAccessToken(){
     const consumer_key="z20NFw1rcxc98hm0N3fxL84YenbkuLtGXbXzAMoh4iBBOSh2";
     const consumer_secret="6ILuhlrIdH3VbAg7kvYGiJIgPA2KCMDCngM93F2cJATgvdygIBHqVwfmPprMU2Kc";
     const auth=
-    new Buffer.from(consumer_key+":"+consumer_secret).toString("base64");
+     Buffer.from(consumer_key+":"+consumer_secret).toString("base64");
      
     const options = {
         hostname: 'sandbox.safaricom.co.ke',
@@ -167,4 +168,5 @@ app.use("/contact",contactRoute);
 app.use("/images/hero", express.static("public/images/hero"));
 
 // Start Server
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(5000, () =>{ console.log(`Server running on http://localhost:${PORT}`);
+});

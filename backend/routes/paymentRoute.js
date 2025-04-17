@@ -4,70 +4,56 @@ const router=express.Router();
 const http =require("http");
 const request=require("request");
 const https =require("https");
+const Payment = require("../Model/Payment");
 
-router.post("/stkpush",(req,res)=>{
-     const { phoneNumber, amount, reference, accountReference } = req.body;
-    console.log("Amount:",amount);
-    console.log("Phone Number:",phoneNumber);
-     console.log("Reference:",reference);
-    console.log("Account Reference:",accountReference);
-    res.json({message:"Payment initiated successfully"});
-    if (phoneNumber.startsWith("+254")) {
-        phoneNumber = phoneNumber.replace("+254", "0");
-    }
-    getAccessToken()
-    .then((accessToken)=>{
-        const url="https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-        auth=`Bearer ${accessToken}`;
-        const timestamp=moment().format("YYYYMMDDHHmmss");
-        const password=Buffer.from(//removed new
-            "174379"+
-            "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
-            +timestamp
-        ).toString("base64");
-        request({
-            url:url,
-            method:"POST",
-            headers:{
-                Authorization:auth,
 
-            },
-            json:{
-                BusinessShortCode:"174379",
-                Password:password,
-                Timestamp:timestamp,
-                TransactionType:"CustomerPayBillOnline",
-                Amount:amount,
-                PartyA:phoneNumber,
-                PartyB:"174379",
-                PhoneNumber:phoneNumber,
-                CallBackURL:"https://mydomain.com/path",
-                AccountReference:"GlowCart",
-                TransactionDesc:"Mpesa Daraja API stk push",
-            
-    
+router.post("/stkpush", async (req, res) => {
+  
+  try {
+    const { phoneNumber, amount} = req.body;
+       console.log("Amount:", amount);
+    console.log("Phone Number:", phoneNumber);
+
+    const accessToken = await getAccessToken(); // Ensure this function works correctly
+    const timestamp = moment().format("YYYYMMDDHHmmss");
+    const password = Buffer.from(
+      "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2c2c5c7c" + timestamp
+    ).toString("base64");
+
+
+    const response = await request.post({
+      url: "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+      json: {
+        BusinessShortCode: "174379",
+        Password: password,
+        Timestamp: timestamp,
+        TransactionType: "CustomerPayBillOnline",
+        Amount: amount,
+        PartyA: phoneNumber,
+        PartyB: "174379",
+        PhoneNumber: phoneNumber,
+        CallBackURL: "https://5b6e-197-248-38-31.ngrok-free.app/payment/callback",
+        AccountReference: "GlowCart",
+        TransactionDesc: "Mpesa Daraja API stk push",
+      },
+   headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
-        },
-    function(error,response,body){
-        if(error){
-            console.log(error);
-
-        }else{
-            console.log(response.data);
-            res.status(200).json({
-                message:"Request is successful. Please enter MPESA pin",
-                status:true,
-            });
+      },
+      (error, response, body) => {
+        if (error) {
+          console.error("Error during STK Push:", error);
+          return res.status(500).json({ error: "Failed to initiate STK Push" });
         }
-    }
-        );
-    })
-    .catch((error) => {//ensured that error is more descriptive
-            console.error(error);
-            res.status(500).send("Failed to fetch access token");
-        });
 
-
+        console.log("Request is successful. Please enter MPESA pin.");
+        res.status(200).json(body);
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+    res.status(500).json({ error: "Failed to fetch access token" });
+  }
 });
 router.get("/home",(req,res)=>{
     res.json({message:"Welcome to the payment home page"});
@@ -89,7 +75,7 @@ function getAccessToken(){
     const consumer_key="z20NFw1rcxc98hm0N3fxL84YenbkuLtGXbXzAMoh4iBBOSh2";
     const consumer_secret="6ILuhlrIdH3VbAg7kvYGiJIgPA2KCMDCngM93F2cJATgvdygIBHqVwfmPprMU2Kc";
     const auth=
-    new Buffer.from(consumer_key+":"+consumer_secret).toString("base64");
+    Buffer.from(consumer_key+":"+consumer_secret).toString("base64");
      
     const options = {
         hostname: 'sandbox.safaricom.co.ke',
@@ -127,34 +113,75 @@ function getAccessToken(){
 }
 router.post("/callback", (req, res) => {
   console.log("STK PUSH CALLBACK");
+
+  // Send an immediate response to Safaricom
+  res.status(200).json({ message: "Callback received successfully" });
+
+  // Process the callback data
   const merchantRequestID = req.body.Body.stkCallback.MerchantRequestID;
   const checkoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
   const resultCode = req.body.Body.stkCallback.ResultCode;
   const resultDesc = req.body.Body.stkCallback.ResultDesc;
-  const callbackMetadata = req.body.Body.stkCallback.CallbackMetadata;
-  const amount = callbackMetadata.Item[0].Value;
-  const mpesaReceiptNumber = callbackMetadata.Item[1].Value;
-  const transactionDate = callbackMetadata.Item[3].Value;
-  const phoneNumber = callbackMetadata.Item[4].Value;
 
-  console.log("MerchantRequestID:", merchantRequestID);
-  console.log("CheckoutRequestID:", checkoutRequestID);
-  console.log("ResultCode:", resultCode);
-  console.log("ResultDesc:", resultDesc);
-  
-  console.log("Amount:", amount);
-  console.log("MpesaReceiptNumber:", mpesaReceiptNumber);
-  console.log("TransactionDate:", transactionDate);
-  console.log("PhoneNumber:", phoneNumber);
+  // Check if the transaction was successful
+  if (resultCode === 0) {
+    const callbackMetadata = req.body.Body.stkCallback.CallbackMetadata;
+    const amount = callbackMetadata.Item[0].Value;
+    const mpesaReceiptNumber = callbackMetadata.Item[1].Value;
+    const transactionDate = callbackMetadata.Item[3].Value;
+    const phoneNumber = callbackMetadata.Item[4].Value;
 
-  var json = JSON.stringify(req.body);
-  fs.writeFile("stkcallback.json", json, "utf8", function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log("Stk push call back saved successfully");
-  });
+    console.log("Payment successful:", {
+      merchantRequestID,
+      checkoutRequestID,
+      resultCode,
+      resultDesc,
+      amount,
+      mpesaReceiptNumber,
+      transactionDate,
+      phoneNumber,
+    });
+
+    // Save the data to the database
+    const payment = new Payment({
+      merchantRequestID,
+      checkoutRequestID,
+      resultCode,
+      resultDesc,
+      amount,
+      mpesaReceiptNumber,
+      transactionDate: new Date(
+        transactionDate.toString().replace(
+          /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
+          "$1-$2-$3T$4:$5:$6Z"
+        )
+      ), // Convert Safaricom's timestamp to ISO format
+      phoneNumber,
+    });
+
+    payment.save((err) => {
+      if (err) {
+        return console.log("Error saving callback data:", err);
+      }
+      console.log("STK Push callback saved successfully");
+    });
+  } else {
+    console.log("Payment failed:", resultDesc);
+
+    // Save failed transaction details
+    const payment = new Payment({
+      merchantRequestID,
+      checkoutRequestID,
+      resultCode,
+      resultDesc,
+    });
+
+    payment.save((err) => {
+      if (err) {
+        return console.log("Error saving failed transaction:", err);
+      }
+      console.log("Failed transaction saved successfully");
+    });
+  }
 });
-
-
 module.exports=router;

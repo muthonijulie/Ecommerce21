@@ -26,56 +26,56 @@ mongoose
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error(err));
-app.get("/stkpush",(req,res)=>{
-    getAccessToken()
-    .then((accessToken)=>{
-        const url="https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-        auth=`Bearer ${accessToken}`;
-        const timestamp=moment().format("YYYYMMDDHHmmss");
-        const password=Buffer.from(//removed new
-            "174379"+
-            "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
-            +timestamp
-        ).toString("base64");
-        request({
-            url:url,
-            method:"POST",
-            headers:{
-                Authorization:auth,
+// app.get("/stkpush",(req,res)=>{
+//     getAccessToken()
+//     .then((accessToken)=>{
+//         const url="https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+//         auth=`Bearer ${accessToken}`;
+//         const timestamp=moment().format("YYYYMMDDHHmmss");
+//         const password=Buffer.from(//removed new
+//             "174379"+
+//             "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
+//             +timestamp
+//         ).toString("base64");
+//         request({
+//             url:url,
+//             method:"POST",
+//             headers:{
+//                 Authorization:auth,
 
-            },
-            json:{
-                BusinessShortCode:"174379",
-                Password:password,
-                Timestamp:timestamp,
-                TransactionType:"CustomerPayBillOnline",
-                Amount:100,
-                PartyA:"254797565461",
-                PartyB:"174379",
-                PhoneNumber:"254797565461",
-                CallBackURL:" https://5b6e-197-248-38-31.ngrok-free.app/payment/callback",
-                AccountReference:"GlowCart",
-                TransactionDesc:"Mpesa Daraja API stk push test ",
+//             },
+//             json:{
+//                 BusinessShortCode:"174379",
+//                 Password:password,
+//                 Timestamp:timestamp,
+//                 TransactionType:"CustomerPayBillOnline",
+//                 Amount:100,
+//                 PartyA:"0797565461",
+//                 PartyB:"174379",
+//                 PhoneNumber:"0797565461",
+//                 CallBackURL:" https://5b6e-197-248-38-31.ngrok-free.app/payment/callback",
+//                 AccountReference:"GlowCart",
+//                 TransactionDesc:"Mpesa Daraja API stk push test ",
             
     
-        },
-        },
-    function(error,response,body){
-        if(error){
-            console.log(error);
+//         },
+//         },
+//     function(error,response,body){
+//         if(error){
+//             console.log(error);
 
-        }else{
-            console.log("Request is successful.Please enter MPESA pin");
-            res.status(200).json(body);
-        }
-    }
-        );
-    })
-    .catch((error) => {//ensured that error is more descriptive
-            console.error(error);
-            res.status(500).send("Failed to fetch access token");
-        });
-});
+//         }else{
+//             console.log("Request is successful.Please enter MPESA pin");
+//             res.status(200).json(body);
+//         }
+//     }
+//         );
+//     })
+//     .catch((error) => {//ensured that error is more descriptive
+//             console.error(error);
+//             res.status(500).send("Failed to fetch access token");
+//         });
+// });
 
 app.get("/registerurl",(req,res)=>{
     getAccessToken()

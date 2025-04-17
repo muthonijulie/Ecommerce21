@@ -29,7 +29,7 @@ const PaymentForm = () => {
     }).format(amount);
   };
 const validatePhoneNumber=(phoneNumber) => {
-  const regex=/^254|07\d{9}$/;
+  const regex=/^07\d{8}$/;
   return regex.test(phoneNumber);
 };
   const validateForm = () => {
@@ -60,7 +60,7 @@ const handleSubmit = async (e) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        phoneNumber: phoneNumber,
+        phoneNumber: phoneNumber ,
         amount: paymentInfo.total,
         reference: paymentInfo.orderId,
         accountReference: paymentInfo.accountReference,
@@ -79,6 +79,8 @@ const handleSubmit = async (e) => {
     console.error("Error during payment:", error);
     setPaymentState("failed");
     setErrors({ payment: "Payment failed! Please try again later." });
+  } finally{
+    setIsLoading(false);
   }
 
 };

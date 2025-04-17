@@ -7,37 +7,40 @@ const https =require("https");
 const Payment = require("../Model/Payment");
 
 
-router.post("/stkpush", async (req, res) => {
+
+
+router.post("/stkpush", (req, res) => {
   
-  try {
-    const { phoneNumber, amount} = req.body;
-       console.log("Amount:", amount);
-    console.log("Phone Number:", phoneNumber);
+  let phoneNumber = req.body.phoneNumber;
+  const amount = req.body.amount;
 
-    const accessToken = await getAccessToken(); // Ensure this function works correctly
-    const timestamp = moment().format("YYYYMMDDHHmmss");
-    const password = Buffer.from(
-      "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2c2c5c7c" + timestamp
-    ).toString("base64");
+  if (phoneNumber.startsWith("0")) {
+    phoneNumber = "254" + phoneNumber.slice(1);
+  }
+  const timestamp = moment().format("YYYYMMDDHHmmss");
+  const password = Buffer.from(
+    "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2c2c5c7c" + timestamp
+  ).toString("base64");
 
-
-    const response = await request.post({
-      url: "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
-      json: {
-        BusinessShortCode: "174379",
-        Password: password,
-        Timestamp: timestamp,
-        TransactionType: "CustomerPayBillOnline",
-        Amount: amount,
-        PartyA: phoneNumber,
-        PartyB: "174379",
-        PhoneNumber: phoneNumber,
-        CallBackURL: "https://5b6e-197-248-38-31.ngrok-free.app/payment/callback",
-        AccountReference: "GlowCart",
-        TransactionDesc: "Mpesa Daraja API stk push",
-      },
-   headers: {
+  getAccessToken().then((accessToken) => {
+    request.post(
+      {
+        url: "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+        headers: {
           Authorization: `Bearer ${accessToken}`,
+        },
+        json: {
+          BusinessShortCode: "174379",
+          Password: password,
+          Timestamp: timestamp,
+          TransactionType: "CustomerPayBillOnline",
+          Amount: amount,
+          PartyA: phoneNumber,
+          PartyB: "174379",
+          PhoneNumber: phoneNumber,
+          CallBackURL: "https://5b6e-197-248-38-31.ngrok-free.app/payment/callback",
+          AccountReference: "GlowCart",
+          TransactionDesc: "Mpesa Daraja API stk push",
         },
       },
       (error, response, body) => {
@@ -50,10 +53,10 @@ router.post("/stkpush", async (req, res) => {
         res.status(200).json(body);
       }
     );
-  } catch (error) {
-    console.error("Error fetching access token:", error);
-    res.status(500).json({ error: "Failed to fetch access token" });
-  }
+  }).catch((err) => {
+    console.error("Access token error:", err);
+    res.status(500).json({ error: "Access token fetch failed" });
+  });
 });
 router.get("/home",(req,res)=>{
     res.json({message:"Welcome to the payment home page"});
